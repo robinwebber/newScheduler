@@ -58,10 +58,18 @@ export default function Application(props) {
 
   const appointmentMaker =  appointments.map((appointment) => <Appointment key={appointment.id} id={appointment.id} time={appointment.time} interview={appointment.interview} />)
 
-  const [days, setDays] = useState([]);
+  // const [days, setDays] = useState([]);
 
-  const [day, setDay] = useState('Monday');
+  // const [day, setDay] = useState('Monday');
 
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState({ ...state, days });
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/days")
@@ -79,8 +87,8 @@ export default function Application(props) {
         />
           <hr className="sidebar__separator sidebar--centered" />
         <DayList
-          days={days}
-          day={day}
+          days={state.days}
+          day={state.day}
           setDay={setDay}
         />
         <nav className="sidebar__menu" />
