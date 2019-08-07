@@ -15,3 +15,23 @@ export default function getAppointmentsForDay(state, day) {
   return appointmentsObjects;
 
 };
+
+export function getInterview(state, interview) {
+
+  if (interview === null) {
+    return null;
+  }
+
+  let interviewerId = interview.interviewer;
+
+  let interviewObj = {
+    student: interview.student,
+    interviewer: {
+      id: state.interviewers[interviewerId].id,
+      name: state.interviewers[interviewerId].name,
+      avatar: state.interviewers[interviewerId].avatar
+    }
+  }
+  return interviewObj;
+
+};
