@@ -53,14 +53,7 @@ const appointments = [
 
 export default function Application(props) {
 
-
-  
-
   const appointmentMaker =  appointments.map((appointment) => <Appointment key={appointment.id} id={appointment.id} time={appointment.time} interview={appointment.interview} />)
-
-  // const [days, setDays] = useState([]);
-
-  // const [day, setDay] = useState('Monday');
 
   const [state, setState] = useState({
     day: "Monday",
@@ -70,6 +63,8 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
   const setDays = days => setState({ ...state, days });
+
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/days")
