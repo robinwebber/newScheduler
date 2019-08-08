@@ -1,21 +1,22 @@
-import React from 'react';
-import "components/Appointment/styles.scss"
-import Header from 'components/Appointment/Header'
-import Empty from 'components/Appointment/Empty'
-import Show from 'components/Appointment/Show'
+import React from "react";
+import "components/Appointment/styles.scss";
+import Header from "components/Appointment/Header";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
-import { useVisualMode } from 'hooks/useVisualMode'
+import { useVisualMode } from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-
+const CREATE = "CREATE";
 
 export default function Appointment(props) {
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
-  const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
-  
   return (
-    <React.Fragment >
+    <React.Fragment>
       <Header time={props.time} />
       {mode === EMPTY && <Empty />}
       {mode === SHOW && (
@@ -30,6 +31,6 @@ export default function Appointment(props) {
     : 
       <Empty onAdd={props.onAdd}/>
     } */}
-    </ React.Fragment>
+    </React.Fragment>
   );
 }
