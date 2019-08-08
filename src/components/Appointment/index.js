@@ -26,7 +26,7 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
         />
       )}
-      {mode === CREATE && <Form interviewers={[]} />}
+      {mode === CREATE && <Form interviewers={[]} onCancel={() => back()} />}
       {/* {props.interview ? 
       <Show student={props.interview.student} onEdit={props.onEdit} onDelete={props.onDelete} interviewer={props.interview.interviewer} /> 
     : 
