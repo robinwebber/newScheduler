@@ -33,8 +33,6 @@ export default function Application(props) {
     })
   }, []);
 
-  console.log('interviewers', state.interviewers);
-
   const appointments = getAppointmentsForDay(state, state.day);
 
   const schedule = appointments.map((appointment) => {
@@ -50,11 +48,6 @@ export default function Application(props) {
     );
   });
   
-
-  // const appointmentMaker =  appointments.map((appointment) => ({})
-  // <Appointment key={appointment.id} id={appointment.id} time={appointment.time} interview={appointment.interview} />)
-  
-
   return (
     <main className="layout">
       <section className="sidebar">
