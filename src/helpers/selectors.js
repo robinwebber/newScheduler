@@ -1,5 +1,4 @@
 export default function getAppointmentsForDay(state, day) {
-
   // get appointment numbers from the day property of state
   let daysAppointmentsArray = [];
 
@@ -10,14 +9,14 @@ export default function getAppointmentsForDay(state, day) {
   }
 
   // get the appoint objects from the state using the appointment numbers
-  const appointmentsObjects = daysAppointmentsArray.map(app => state.appointments[app])
+  const appointmentsObjects = daysAppointmentsArray.map(
+    app => state.appointments[app]
+  );
 
   return appointmentsObjects;
-
-};
+}
 
 export function getInterview(state, interview) {
-
   if (interview === null) {
     return null;
   }
@@ -31,7 +30,23 @@ export function getInterview(state, interview) {
       name: state.interviewers[interviewerId].name,
       avatar: state.interviewers[interviewerId].avatar
     }
-  }
+  };
   return interviewObj;
+}
 
-};
+export function getInterviewersForDay(state, day) {
+  // get appointment numbers from the day property of state
+  let daysInterviewersArray = [];
+
+  for (let daysObj of state.days) {
+    if (daysObj.name === day) {
+      daysInterviewersArray = daysObj.interviewers;
+    }
+  }
+
+  const interviewersObjects = daysInterviewersArray.map(
+    app => state.interviewers[app]
+  );
+
+  return interviewersObjects;
+}
