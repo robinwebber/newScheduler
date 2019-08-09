@@ -1,8 +1,9 @@
 import React from "react";
 
 export default function Show(props) {
-
-
+  //onClick={event => props.onSave(name, interviewer)}
+  console.log("props from show.js", props);
+  console.log("props.id from show.js", props.id);
 
   return (
     <main className="appointment__card appointment__card--show">
@@ -25,7 +26,7 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={props.onDelete}
+            onClick={event => props.onDelete(props.id)}
           />
         </section>
       </section>

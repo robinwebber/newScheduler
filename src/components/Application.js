@@ -41,15 +41,31 @@ export default function Application(props) {
 
   function bookInterview(id, interview) {
     console.log(id, interview);
-    const appointmentsInState = { ...state.appointments };
 
-    const newAppointment = {
+    const appointment = {
       ...state.appointments[id],
-      interview
+      interview: { ...interview }
     };
 
-    console.log("newAppointment", newAppointment);
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios
+      .put(`http://localhost:3001/api/appointments/${id}`, appointment)
+      .then(() =>
+        setState(state => ({
+          ...state,
+          appointments
+        }))
+      )
+      .catch(err => console.log(err));
   }
+
+  const removeInterview = id => {
+    console.log("id in removeInterview", id);
+  };
 
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);

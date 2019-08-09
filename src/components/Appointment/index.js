@@ -4,30 +4,35 @@ import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status";
 
 import { useVisualMode } from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const STATUS = "STATUS";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
-  function save(name, interviewer) {
-    console.log(name, interviewer);
+  const save = (name, interviewer) => {
     //make an object
     const interviewMadeFromChildFormAndToBePassedToParent = {
       student: name,
       interviewer
     };
-    props.bookInterview(
-      props.id,
-      interviewMadeFromChildFormAndToBePassedToParent
-    );
-  }
+    transition(STATUS);
+    props
+      .bookInterview(props.id, interviewMadeFromChildFormAndToBePassedToParent)
+      .then(() => transition(SHOW));
+  };
+
+  const remove = id => {
+    console.log("id from index.js remove", id);
+  };
 
   return (
     <React.Fragment>
@@ -37,6 +42,8 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={remove}
+          id={props.id}
         />
       )}
       {mode === CREATE && (
@@ -46,6 +53,7 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
+      {mode === STATUS && <Status />}
     </React.Fragment>
   );
 }
