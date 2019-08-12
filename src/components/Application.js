@@ -57,9 +57,9 @@ export default function Application(props) {
           ...state,
           appointments
         }))
-      )
+      );
 
-      .catch(err => console.log(err));
+    // .catch(err => console.log(err));
   }
 
   const removeInterview = id => {
@@ -79,8 +79,8 @@ export default function Application(props) {
           ...state,
           appointments
         }))
-      )
-      .catch(err => console.log(err));
+      );
+    // .catch(err => console.log(err));
   };
 
   const schedule = appointments.map(appointment => {

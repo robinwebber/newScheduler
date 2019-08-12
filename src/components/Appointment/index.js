@@ -6,6 +6,7 @@ import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 
 import { useVisualMode } from "hooks/useVisualMode";
 
@@ -14,6 +15,8 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const STATUS = "STATUS";
 const CONFIRM = "CONFIRM";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -29,13 +32,17 @@ export default function Appointment(props) {
     transition(STATUS);
     props
       .bookInterview(props.id, interviewMadeFromChildFormAndToBePassedToParent)
-      .then(() => transition(SHOW));
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   const remove = id => {
     // transition(EMPTY);
     transition(STATUS);
-    props.removeInterview(id).then(() => transition(EMPTY));
+    props
+      .removeInterview(id)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
   const confirmRemove = () => {
@@ -70,6 +77,15 @@ export default function Appointment(props) {
           onCancel={() => back()}
           onConfirm={remove}
           id={props.id}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message={"Could not save interview"} onClose={() => back()} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error
+          message={"Could not delete interview"}
+          onClose={() => transition(SHOW)}
         />
       )}
     </React.Fragment>
