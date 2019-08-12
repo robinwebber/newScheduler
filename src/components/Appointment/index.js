@@ -19,7 +19,6 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  console.log("props from index.js -----", props);
 
   const save = (name, interviewer) => {
     //make an object
@@ -34,7 +33,6 @@ export default function Appointment(props) {
   };
 
   const remove = id => {
-    console.log("id from index.js remove", id);
     // transition(EMPTY);
     transition(STATUS);
     props.removeInterview(id).then(() => transition(EMPTY));

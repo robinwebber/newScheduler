@@ -40,13 +40,11 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-    console.log("-----appointment-----", appointment);
+
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -60,7 +58,7 @@ export default function Application(props) {
           appointments
         }))
       )
-      .then(() => console.log("state------", state))
+
       .catch(err => console.log(err));
   }
 
