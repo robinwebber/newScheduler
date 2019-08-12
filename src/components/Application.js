@@ -46,7 +46,7 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview }
     };
-
+    console.log("-----appointment-----", appointment);
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -60,6 +60,7 @@ export default function Application(props) {
           appointments
         }))
       )
+      .then(() => console.log("state------", state))
       .catch(err => console.log(err));
   }
 

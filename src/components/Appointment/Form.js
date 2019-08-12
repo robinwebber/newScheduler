@@ -12,7 +12,8 @@ export default function Form(props) {
   //   setInterviewer(null);
   //   props.onCancel();
   // }
-
+  console.log("props.name in name", props.name);
+  console.log("name in name", name);
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">

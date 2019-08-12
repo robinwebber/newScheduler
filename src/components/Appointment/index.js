@@ -19,6 +19,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+  console.log("props from index.js -----", props);
 
   const save = (name, interviewer) => {
     //make an object
@@ -52,13 +53,16 @@ export default function Appointment(props) {
           interviewer={props.interview && props.interview.interviewer}
           onDelete={confirmRemove}
           id={props.id}
+          onEdit={() => transition(CREATE)}
         />
       )}
       {mode === CREATE && (
         <Form
+          name={props.interview && props.interview.student}
           interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={save}
+          interviewer={props.interview && props.interview.interviewer.id}
         />
       )}
       {mode === STATUS && <Status />}
