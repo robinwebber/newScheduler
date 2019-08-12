@@ -29,7 +29,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    transition(STATUS);
+    transition(STATUS, true);
     props
       .bookInterview(props.id, interviewMadeFromChildFormAndToBePassedToParent)
       .then(() => transition(SHOW))
@@ -38,7 +38,7 @@ export default function Appointment(props) {
 
   const remove = id => {
     // transition(EMPTY);
-    transition(STATUS);
+    transition(STATUS, true);
     props
       .removeInterview(id)
       .then(() => transition(EMPTY))
@@ -83,10 +83,7 @@ export default function Appointment(props) {
         <Error message={"Could not save interview"} onClose={() => back()} />
       )}
       {mode === ERROR_DELETE && (
-        <Error
-          message={"Could not delete interview"}
-          onClose={() => transition(SHOW)}
-        />
+        <Error message={"Could not delete interview"} onClose={() => back()} />
       )}
     </React.Fragment>
   );
