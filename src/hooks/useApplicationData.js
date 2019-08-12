@@ -9,6 +9,7 @@ export function useApplicationData() {
 
   function reducer(state, action) {
     const { day, days, appointments, interviewers, id, interview } = action;
+    console.log("inside reducer", state);
     switch (action.type) {
       case SET_DAY:
         return { ...state, day };
@@ -70,7 +71,9 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-
+    // const spotsForDay = state => {
+    //   return state;
+    // };
     return axios
       .put(`http://localhost:3001/api/appointments/${id}`, appointment)
       .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
