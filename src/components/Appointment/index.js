@@ -5,6 +5,7 @@ import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
+import Confirm from "components/Appointment/Confirm";
 
 import { useVisualMode } from "hooks/useVisualMode";
 
@@ -12,6 +13,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const STATUS = "STATUS";
+const CONFIRM = "CONFIRM";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -32,17 +34,23 @@ export default function Appointment(props) {
 
   const remove = id => {
     console.log("id from index.js remove", id);
+    // transition(EMPTY);
+    transition(STATUS);
+    props.removeInterview(id).then(() => transition(EMPTY));
   };
 
+  const confirmRemove = () => {
+    transition(CONFIRM);
+  };
   return (
     <React.Fragment>
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
-          onDelete={remove}
+          student={props.interview && props.interview.student}
+          interviewer={props.interview && props.interview.interviewer}
+          onDelete={confirmRemove}
           id={props.id}
         />
       )}
@@ -54,6 +62,14 @@ export default function Appointment(props) {
         />
       )}
       {mode === STATUS && <Status />}
+      {mode === CONFIRM && (
+        <Confirm
+          message="Are you sure you want to delete this interview?"
+          onCancel={() => back()}
+          onConfirm={remove}
+          id={props.id}
+        />
+      )}
     </React.Fragment>
   );
 }
