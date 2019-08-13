@@ -1,7 +1,7 @@
 export default function getAppointmentsForDay(state, day) {
   // get appointment numbers from the day property of state
   let daysAppointmentsArray = [];
-  console.log("selectors", state);
+
   for (let daysObj of state.days) {
     if (daysObj.name === day) {
       daysAppointmentsArray = daysObj.appointments;
