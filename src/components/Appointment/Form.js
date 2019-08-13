@@ -18,7 +18,10 @@ export default function Form(props) {
     }
     props.onSave(name, interviewer, props.day);
   };
-
+  const clearInputOnCancel = () => {
+    setName("");
+    props.onCancel();
+  };
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -42,7 +45,7 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={props.onCancel} danger>
+          <Button onClick={clearInputOnCancel} danger>
             Cancel
           </Button>
           <Button onClick={validate} confirm>

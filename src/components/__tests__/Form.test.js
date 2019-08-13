@@ -15,7 +15,7 @@ const interviewers = [
     avatar: "https://i.imgur.com/LpaY82x.png"
   }
 ];
-describe("form componenet", () => {
+describe("Form", () => {
   it("renders with initial student name", () => {
     const { getByTestId } = render(
       <Form interviewers={interviewers} name="Lydia Miller-Jones" />

@@ -29,7 +29,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    console.log("inside save function", props.day);
+
     transition(STATUS, true);
     props
       .bookInterview(
@@ -40,7 +40,9 @@ export default function Appointment(props) {
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
   };
-
+  const cancelFunction = () => {
+    back();
+  };
   const remove = (id, dayFromForm) => {
     // transition(EMPTY);
     transition(STATUS, true);
@@ -72,7 +74,7 @@ export default function Appointment(props) {
         <Form
           name={props.interview && props.interview.student}
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          onCancel={cancelFunction}
           onSave={save}
           interviewer={props.interview && props.interview.interviewer.id}
           day={props.day}
