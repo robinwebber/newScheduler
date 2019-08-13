@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 const axios = require("axios");
 
@@ -32,18 +32,13 @@ export function useApplicationData() {
           ...state.appointments,
           [id]: appointment
         };
-        console.log("=====interview=====", interview);
-        const days = state.days.map(dayObj => {
-          console.log("line 37----", dayObj, action.dayFromForm);
 
+        const days = state.days.map(dayObj => {
           if (dayObj.name === dayFromForm && interview) {
-            console.log("line 38----", interview);
             return { ...dayObj, spots: dayObj.spots - 1 };
           } else if (dayObj.name === dayFromForm && action.interview === null) {
-            console.log("line 41------", interview);
             return { ...dayObj, spots: dayObj.spots + 1 };
           } else {
-            console.log("line 44 -------", interview);
             return { ...dayObj };
           }
         });
@@ -64,7 +59,7 @@ export function useApplicationData() {
   });
 
   const setDay = day => dispatch({ type: SET_DAY, day });
-  const setDays = days => dispatch({ ...state, days });
+  // const setDays = days => dispatch({ ...state, days });
 
   useEffect(() => {
     Promise.all([
