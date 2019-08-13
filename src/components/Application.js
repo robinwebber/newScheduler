@@ -34,6 +34,8 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         removeInterview={removeInterview}
+        day={state.day}
+        // spots={state.days.spots}
       />
     );
   });

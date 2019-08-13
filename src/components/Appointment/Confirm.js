@@ -10,7 +10,7 @@ export default function Confirm(props) {
         <Button onClick={props.onCancel} danger>
           Cancel
         </Button>
-        <Button onClick={event => props.onConfirm(props.id)} danger>
+        <Button onClick={event => props.onConfirm(props.id, props.day)} danger>
           Confirm
         </Button>
       </section>

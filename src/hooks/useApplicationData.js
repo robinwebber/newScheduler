@@ -8,8 +8,16 @@ export function useApplicationData() {
   const SET_INTERVIEW = "SET_INTERVIEW";
 
   function reducer(state, action) {
-    const { day, days, appointments, interviewers, id, interview } = action;
-    console.log("inside reducer", state);
+    const {
+      day,
+      days,
+      appointments,
+      interviewers,
+      id,
+      interview,
+      dayFromForm
+    } = action;
+    // console.log("inside reducer", state);
     switch (action.type) {
       case SET_DAY:
         return { ...state, day };
@@ -24,7 +32,22 @@ export function useApplicationData() {
           ...state.appointments,
           [id]: appointment
         };
-        return { ...state, appointments };
+        console.log("=====interview=====", interview);
+        const days = state.days.map(dayObj => {
+          console.log("line 37----", dayObj, action.dayFromForm);
+
+          if (dayObj.name === dayFromForm && interview) {
+            console.log("line 38----", interview);
+            return { ...dayObj, spots: dayObj.spots - 1 };
+          } else if (dayObj.name === dayFromForm && action.interview === null) {
+            console.log("line 41------", interview);
+            return { ...dayObj, spots: dayObj.spots + 1 };
+          } else {
+            console.log("line 44 -------", interview);
+            return { ...dayObj };
+          }
+        });
+        return { ...state, appointments, days };
       }
       default:
         throw new Error(
@@ -61,7 +84,9 @@ export function useApplicationData() {
   // const appointments = getAppointmentsForDay(state, state.day);
   // const interviewers = getInterviewersForDay(state, state.day);
 
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, dayFromForm) {
+    console.log("inside bookinterview", dayFromForm);
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -71,15 +96,15 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    // const spotsForDay = state => {
-    //   return state;
-    // };
+
     return axios
       .put(`http://localhost:3001/api/appointments/${id}`, appointment)
-      .then(() => dispatch({ type: SET_INTERVIEW, id, interview }));
+      .then(() =>
+        dispatch({ type: SET_INTERVIEW, id, interview, dayFromForm })
+      );
   }
 
-  const removeInterview = id => {
+  const removeInterview = (id, dayFromForm) => {
     // state.appointments[id].interview = null
     const appointment = {
       ...state.appointments[id],
@@ -91,7 +116,9 @@ export function useApplicationData() {
     };
     return axios
       .delete(`http://localhost:3001/api/appointments/${id}`)
-      .then(() => dispatch({ type: SET_INTERVIEW, id, interview: null }));
+      .then(() =>
+        dispatch({ type: SET_INTERVIEW, id, interview: null, dayFromForm })
+      );
   };
   return { state, setDay, bookInterview, removeInterview };
 }

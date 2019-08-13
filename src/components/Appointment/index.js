@@ -29,18 +29,23 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
+    console.log("inside save function", props.day);
     transition(STATUS, true);
     props
-      .bookInterview(props.id, interviewMadeFromChildFormAndToBePassedToParent)
+      .bookInterview(
+        props.id,
+        interviewMadeFromChildFormAndToBePassedToParent,
+        props.day
+      )
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
   };
 
-  const remove = id => {
+  const remove = (id, dayFromForm) => {
     // transition(EMPTY);
     transition(STATUS, true);
     props
-      .removeInterview(id)
+      .removeInterview(id, dayFromForm)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   };
@@ -59,6 +64,8 @@ export default function Appointment(props) {
           onDelete={confirmRemove}
           id={props.id}
           onEdit={() => transition(CREATE)}
+          day={props.day}
+          spots={props.spots}
         />
       )}
       {mode === CREATE && (
@@ -68,6 +75,7 @@ export default function Appointment(props) {
           onCancel={() => back()}
           onSave={save}
           interviewer={props.interview && props.interview.interviewer.id}
+          day={props.day}
         />
       )}
       {mode === STATUS && <Status />}
@@ -77,6 +85,7 @@ export default function Appointment(props) {
           onCancel={() => back()}
           onConfirm={remove}
           id={props.id}
+          day={props.day}
         />
       )}
       {mode === ERROR_SAVE && (
