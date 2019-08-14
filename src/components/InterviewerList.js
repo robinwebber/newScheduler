@@ -7,6 +7,7 @@ import InterviewerListItem from "./InterviewerListItem";
 export default function InterviewerList(props) {
   const { interviewers } = props;
 
+  // generates the list of interviews for the day, 'mentor' was used in map function to reduce how many things are called interviewer
   const interviewerList = interviewers.map(mentor => (
     <InterviewerListItem
       key={mentor.id}

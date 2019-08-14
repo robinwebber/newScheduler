@@ -1,5 +1,5 @@
+// Selects the correct appointments from database according to the day ("Monday", "Tuesday", etc.)
 export default function getAppointmentsForDay(state, day) {
-  // get appointment numbers from the day property of state
   let daysAppointmentsArray = [];
 
   for (let daysObj of state.days) {
@@ -8,14 +8,13 @@ export default function getAppointmentsForDay(state, day) {
     }
   }
 
-  // get the appoint objects from the state using the appointment numbers
   const appointmentsObjects = daysAppointmentsArray.map(
     app => state.appointments[app]
   );
 
   return appointmentsObjects;
 }
-
+// Populates the correct interview for the time-slot
 export function getInterview(state, interview) {
   if (interview === null) {
     return null;
@@ -33,9 +32,8 @@ export function getInterview(state, interview) {
   };
   return interviewObj;
 }
-
+// Selects the correct interviewers from database according to the day ("Monday", "Tuesday", etc.)
 export function getInterviewersForDay(state, day) {
-  // get appointment numbers from the day property of state
   let daysInterviewersArray = [];
 
   for (let daysObj of state.days) {

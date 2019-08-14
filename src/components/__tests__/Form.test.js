@@ -1,3 +1,5 @@
+// This file is messy, testing was not completed and ran into issues surrounding the way I updated spots remaining
+
 import { cleanup, render } from "@testing-library/react";
 import React from "react";
 import { fireEvent } from "@testing-library/react";

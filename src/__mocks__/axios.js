@@ -1,3 +1,5 @@
+// Mock data for testing axios calls in jest
+
 const fixtures = {
   days: [
     {

@@ -23,8 +23,8 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  // save function that calls a props function to pass info back to parent, also used to update spots remaining- this is why props.day is included as an argument in props.bookInterview
   const save = (name, interviewer) => {
-    //make an object
     const interviewMadeFromChildFormAndToBePassedToParent = {
       student: name,
       interviewer
@@ -43,15 +43,16 @@ export default function Appointment(props) {
   const cancelFunction = () => {
     back();
   };
+
+  //function to remove an interview and update spots remaining by passing info to parent
   const remove = (id, dayFromForm) => {
-    // transition(EMPTY);
     transition(STATUS, true);
     props
       .removeInterview(id, dayFromForm)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   };
-
+  // Used in confirmation of deleting interview
   const confirmRemove = () => {
     transition(CONFIRM);
   };
@@ -80,6 +81,7 @@ export default function Appointment(props) {
           day={props.day}
         />
       )}
+
       {mode === STATUS && <Status />}
       {mode === CONFIRM && (
         <Confirm

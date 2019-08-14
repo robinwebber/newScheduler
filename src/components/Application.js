@@ -9,9 +9,8 @@ import getAppointmentsForDay, {
   getInterviewersForDay
 } from "helpers/selectors";
 
-const axios = require("axios");
-
 export default function Application(props) {
+  //destructing helper functions from custom useApplicationData hook
   const {
     state,
     setDay,
@@ -21,7 +20,7 @@ export default function Application(props) {
 
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
-
+  //Creates the listItems for rendering
   const schedule = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
 

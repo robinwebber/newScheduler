@@ -3,10 +3,12 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function Form(props) {
+  // State local to this component and not included in reducer
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  // Validation function for submission to check if student name && interviewer fields have been populated- otherwise DB crashes
   const validate = function() {
     if (name === "") {
       setError("Student name cannot be blank");
@@ -19,6 +21,7 @@ export default function Form(props) {
     setError("");
     props.onSave(name, interviewer, props.day);
   };
+  // Function that clears the value of the "name" input after canceling
   const clearInputOnCancel = () => {
     setName("");
     props.onCancel();
