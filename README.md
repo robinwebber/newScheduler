@@ -47,3 +47,7 @@ npm run storybook
 ```
 
 ## Screenshots
+
+### Create a new interview
+
+![Create a new interview](https://github.com/robinwebber/newScheduler/blob/master/docs/Create.png)
