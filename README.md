@@ -48,6 +48,18 @@ npm run storybook
 
 ## Screenshots
 
-### Create a new interview
+#### View on initial load
+
+![Initial load](https://github.com/robinwebber/newScheduler/blob/master/docs/home.png)
+
+#### Create a new interview
 
 ![Create a new interview](https://github.com/robinwebber/newScheduler/blob/master/docs/Create.png)
+
+#### Confirmation before destructive action
+
+![Delete](https://github.com/robinwebber/newScheduler/blob/master/docs/confirm_delete.png)
+
+#### Catching errors
+
+![Error](https://github.com/robinwebber/newScheduler/blob/master/docs/error_catch.png)
