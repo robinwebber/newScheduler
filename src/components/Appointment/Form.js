@@ -16,6 +16,7 @@ export default function Form(props) {
       setError("Interviewer cannot be blank");
       return;
     }
+    setError("");
     props.onSave(name, interviewer, props.day);
   };
   const clearInputOnCancel = () => {

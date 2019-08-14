@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
+import axios from "axios";
 
-const axios = require("axios");
+// const axios = require("axios");
 
 export function useApplicationData() {
   const SET_DAY = "SET_DAY";
@@ -80,8 +81,6 @@ export function useApplicationData() {
   // const interviewers = getInterviewersForDay(state, state.day);
 
   function bookInterview(id, interview, dayFromForm) {
-    console.log("inside bookinterview", dayFromForm);
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
